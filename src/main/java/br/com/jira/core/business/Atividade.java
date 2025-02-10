@@ -15,6 +15,11 @@ public class Atividade {
     private int minutosTrabalhados;
     private StatusAtividade status;
 
+    public Atividade(String teste, String descricao, StatusAtividade statusAtividade) {
+    }
+
+    public Atividade(){}
+
     public Long getId() {
         return id;
     }

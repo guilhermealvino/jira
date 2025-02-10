@@ -1,15 +1,21 @@
 spring:
+  # Configurações do PostgreSQL
   datasource:
-    url: jdbc:postgresql://localhost:5432/jiradb
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://localhost:5432/tarefas
+    username: user
+    password: 123456
     driver-class-name: org.postgresql.Driver
-
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/jira
+    # Configurações do MongoDB
+    data:
+      mongodb:
+        uri: mongodb://localhost:27017/meu_mongo
+        database: tarefas

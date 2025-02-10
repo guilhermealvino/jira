@@ -9,7 +9,6 @@ import java.util.Optional;
 
 public interface AtividadeRepository {
     Atividade salvar(Atividade atividade);
-    Optional<Atividade> buscarPorId(Long Id);
-
+    Optional<Atividade> buscarPorId(Long id);
     List<Atividade> buscarFinalizadasPorPeriodo(LocalDate dia);
 }
