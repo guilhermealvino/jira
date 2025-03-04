@@ -18,8 +18,12 @@ import java.util.List;
 @RequestMapping("/atividades")
 public class AtividadeController {
 
+    private final AtividadeService atividadeService;
+
     @Autowired
-    private AtividadeService atividadeService;
+    public AtividadeController(AtividadeService atividadeService) {
+        this.atividadeService = atividadeService;
+    }
 
     @PostMapping
     public ResponseEntity<String> criarAtividade(@RequestBody AtividadeDTO atividadeDTO) {
