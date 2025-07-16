@@ -1,30 +1,38 @@
 package br.com.jira.core.business;
 
-import br.com.jira.commons.StatusAtividade;
+import br.com.jira.commons.StatusAtividadeEnum;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-public class Atividade {
+@Document(collection = "meu_mongo")
+public class AtividadeMongoEntity {
 
-    private Long id;
+    @Id
+    private ObjectId id;
     private String nome;
     private LocalDateTime dataCriacao;
     private LocalDateTime dataInicio;
     private LocalDateTime dataFinalizacao;
     private String comentario;
     private int minutosTrabalhados;
-    private StatusAtividade status;
+    private StatusAtividadeEnum status;
 
-    public Atividade(String teste, String descricao, StatusAtividade statusAtividade) {
+    public AtividadeMongoEntity(String nome, String comentario, StatusAtividadeEnum status) {
+        this.nome=nome;
+        this.comentario=comentario;
+        this.status=status;
     }
 
-    public Atividade(){}
+    public AtividadeMongoEntity(){}
 
-    public Long getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
@@ -76,30 +84,30 @@ public class Atividade {
         this.minutosTrabalhados = minutosTrabalhados;
     }
 
-    public StatusAtividade getStatus() {
+    public StatusAtividadeEnum getStatus() {
         return status;
     }
 
-    public void setStatus(StatusAtividade status) {
+    public void setStatus(StatusAtividadeEnum status) {
         this.status = status;
     }
 
-    public Atividade(String nome) {
+    public AtividadeMongoEntity(String nome) {
         this.nome = nome;
         this.dataCriacao = LocalDateTime.now();
-        this.status = StatusAtividade.NAO_RELACIONADO;
+        this.status = StatusAtividadeEnum.NAO_RELACIONADO;
     }
 
     public void iniciar() {
-        if (status != StatusAtividade.NAO_RELACIONADO) {
+        if (status != StatusAtividadeEnum.NAO_RELACIONADO) {
             throw new IllegalStateException("A atividade já foi iniciada.");
         }
-        this.status = StatusAtividade.PENDENTE;
+        this.status = StatusAtividadeEnum.PENDENTE;
         this.dataInicio = LocalDateTime.now();
     }
 
     public void adicionarHoras(int minutos, String comentario) {
-        if (status != StatusAtividade.PENDENTE) {
+        if (status != StatusAtividadeEnum.PENDENTE) {
             throw new IllegalStateException("Apenas atividades pendentes podem receber horas.");
         }
         if (minutos <= 0) {
@@ -110,10 +118,10 @@ public class Atividade {
     }
 
     public void finalizar() {
-        if (status != StatusAtividade.PENDENTE) {
+        if (status != StatusAtividadeEnum.PENDENTE) {
             throw new IllegalStateException("Apenas atividades pendentes podem ser finalizadas.");
         }
-        this.status = StatusAtividade.FINALIZADA;
+        this.status = StatusAtividadeEnum.FINALIZADA;
         this.dataFinalizacao = LocalDateTime.now();
     }
 

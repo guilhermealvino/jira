@@ -1,6 +1,6 @@
 package br.com.jira.commons;
 
-public enum StatusAtividade {
+public enum StatusAtividadeEnum {
 
     NAO_RELACIONADO,
     PENDENTE,
