@@ -15,7 +15,9 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
     # Configurações do MongoDB
-    data:
-      mongodb:
-        uri: mongodb://localhost:27017/meu_mongo
-        database: tarefas
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/meu_mongo
+      database: tarefas
+server:
+  port: 8081
